@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "node-terminal",
+            "name": "Run WebDriverIO",
+            "request": "launch",
+            "command": "npx wdio run ./wdio.conf.ts --spec login.ts",
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
