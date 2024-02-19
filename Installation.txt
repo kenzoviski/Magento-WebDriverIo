@@ -1,0 +1,25 @@
+Installation Webdriver.IO with Typescript language and MOCHA framework
+
+1. Create new folder
+2. npm init -y
+3. npm init wdio@latest .
+4. Follow the Wizard steps by choosing MOCHA and Typescript "Yes"
+5. To run example test: npx wdio run ./wdio.conf.ts --spec test.e2e.ts
+OR
+To run entire suite: npx wdio run ./wdio.conf.ts
+
+----
+
+Debug config
+
+{
+    "configurations": [
+        {
+            "type": "node-terminal",
+            "name": "Run WebDriverIO",
+            "request": "launch",
+            "command": "npx wdio run ./wdio.conf.ts --spec login.ts",
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
