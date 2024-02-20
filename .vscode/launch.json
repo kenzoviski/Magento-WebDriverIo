@@ -4,7 +4,8 @@
             "type": "node-terminal",
             "name": "Run WebDriverIO",
             "request": "launch",
-            "command": "npx wdio run ./wdio.conf.ts --spec login.ts",
+            // "command": "npx wdio run ./wdio.conf.ts",    //run test suite
+            "command": "npx wdio run ./wdio.conf.ts --spec createLogin.ts",
             "cwd": "${workspaceFolder}"
         }
     ]
