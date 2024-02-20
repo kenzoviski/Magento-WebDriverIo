@@ -2,7 +2,7 @@ import { expect } from "@wdio/globals";
 import LoginPage from "../pageobjects/login.page.js";
 
 describe("Login Tests", () => {
-  beforeEach(() => {
+  beforeEach("Open app", () => {
     // Initialize the browser or any other setup code
     LoginPage.openURL("customer/account/login/");
     // browser.maximizeWindow();  // run browser maximized
