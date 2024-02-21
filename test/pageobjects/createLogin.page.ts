@@ -134,11 +134,6 @@ class CreateLogin extends Page {
       await this.clickCreateAnAccount();
     }
   }
-
-  // async emailSetValue(email: string) {
-  //   this.emailTextBox.setValue(email);
-  // }
-
   async clickCreateAnAccount() {
     await this.btnCreateAnAccount.click();
   }

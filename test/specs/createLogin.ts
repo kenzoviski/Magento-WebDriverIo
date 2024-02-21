@@ -70,11 +70,12 @@ describe("Create new login", () => {
     infoUser.email = "test.com";
     const emailAlertMessage = "Please enter a valid email address (Ex: johndoe@domain.com).";
 
-    // await createLoginPage.emailSetValue(infoUser.email);
     await createLoginPage.emailTextBox.setValue(infoUser.email);
     await createLoginPage.clickCreateAnAccount();
     await expect(createLoginPage.emailAlert).toHaveText(emailAlertMessage);
   });
+
+  it("5. Should fill password and assert password strength", async () => {});
 
   it("X. Should fill form correctly and create account", async () => {
     //1 - Teste para preencher os campos e criar o login com sucesso -> Validar que login foi criado
