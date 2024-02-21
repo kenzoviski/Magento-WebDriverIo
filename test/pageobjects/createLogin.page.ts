@@ -28,9 +28,6 @@ class CreateLogin extends Page {
   get passwordTextLabel() {
     return $("#form-validate > fieldset.fieldset.create.account > div.field.password.required > label > span");
   }
-  get passwordStrenghtTextLabel() {
-    return $("#password-strength-meter");
-  }
 
   get confirmPasswordTextLabel() {
     return $("#form-validate > fieldset.fieldset.create.account > div.field.confirmation.required > label > span");
@@ -65,6 +62,32 @@ class CreateLogin extends Page {
     return $("#password-confirmation");
   }
 
+  //Locators - Alerts
+
+  get firstNameAlert() {
+    return $("#firstname-error");
+  }
+
+  get lastNameAlert() {
+    return $("#lastname-error");
+  }
+
+  get emailAlert() {
+    return $("#email_address-error");
+  }
+
+  get passwordsAlert() {
+    return $("#password-error");
+  }
+
+  get passwordAlertStrengthMessage() {
+    return $("#password-strength-meter");
+  }
+
+  get confirmationPasswordAlert() {
+    return $("#password-confirmation-error");
+  }
+
   //Actions
 
   private hasWhitespaces(str: string): boolean {
@@ -76,38 +99,48 @@ class CreateLogin extends Page {
     return passwordRegex.test(password);
   }
 
-  async fieldsSetValues(
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
-    confirmationPassword: string,
-  ) {
-    const fieldValidations = [
-      { field: "First Name", value: firstName },
-      { field: "Last Name", value: lastName },
-      { field: "Email", value: email },
-      { field: "Password", value: password },
-      { field: "Confirmation Password", value: confirmationPassword },
-    ];
+  async fieldsSetValues(firstName: string, lastName: string, email: string, password: string, confirmationPassword: string, expectValidations: boolean = true) {
+    if (!expectValidations) {
+      const fieldValidations = [
+        { field: "First Name", value: firstName },
+        { field: "Last Name", value: lastName },
+        { field: "Email", value: email },
+        { field: "Password", value: password },
+        { field: "Confirmation Password", value: confirmationPassword },
+      ];
 
-    for (const validation of fieldValidations) {
-      if (this.hasWhitespaces(validation.value)) {
-        assert.fail(`Whitespaces were found in ${validation.field}! Test aborted.`);
+      for (const validation of fieldValidations) {
+        if (this.hasWhitespaces(validation.value)) {
+          assert.fail(`Whitespaces were found in ${validation.field}! Test aborted.`);
+        }
+      }
+
+      if (!this.isPasswordValidRegex(password)) {
+        assert.fail("Invalid characters in Password! Test aborted.");
+      }
+
+      if (password !== confirmationPassword) {
+        assert.fail("Password and Confirmation Password do not match! Test aborted.");
       }
     }
-
-    if (!this.isPasswordValidRegex(password)) {
-      assert.fail("Invalid characters in Password! Test aborted.");
-    }
-
-    if (password !== confirmationPassword) {
-      assert.fail("Password and Confirmation Password do not match! Test aborted.");
-    }
-
     // Restante do código para definir os valores nos campos
     await this.firstNameTextBox.setValue(firstName);
     await this.lastNameTextBox.setValue(lastName);
+    await this.emailTextBox.setValue(email);
+    await this.passwordTextBox.setValue(password);
+    await this.confirmPasswordTextBox.setValue(confirmationPassword);
+
+    if (expectValidations) {
+      await this.clickCreateAnAccount();
+    }
+  }
+
+  // async emailSetValue(email: string) {
+  //   this.emailTextBox.setValue(email);
+  // }
+
+  async clickCreateAnAccount() {
+    await this.btnCreateAnAccount.click();
   }
 }
 
