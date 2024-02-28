@@ -109,28 +109,20 @@ describe("Create new login", () => {
   it("5. Should fill password and assert password strength", async () => {
     infoUser.password = "abc"; // Weak
     await createLoginPage.passwordTextBox.setValue(infoUser.password);
-    await expect(createLoginPage.passwordAlertStrengthMessage).toHaveText("Password Strength: Weak"); //Se não funcionar, utilizar o selector: #password-strength-meter-label
+    await expect(createLoginPage.passwordAlertStrengthMessage).toHaveText("Password Strength: Weak");
 
     infoUser.password += ".1.a."; // Medium
     await createLoginPage.passwordTextBox.setValue(infoUser.password);
-    await expect(createLoginPage.passwordAlertStrengthMessage).toHaveText("Password Strength: Medium"); //Se não funcionar, utilizar o selector: #password-strength-meter-label
+    await expect(createLoginPage.passwordAlertStrengthMessage).toHaveText("Password Strength: Medium");
 
     infoUser.password += "1"; // Strong
     await createLoginPage.passwordTextBox.setValue(infoUser.password);
-    await expect(createLoginPage.passwordAlertStrengthMessage).toHaveText("Password Strength: Strong"); //Se não funcionar, utilizar o selector: #password-strength-meter-label
+    await expect(createLoginPage.passwordAlertStrengthMessage).toHaveText("Password Strength: Strong");
 
     infoUser.password += "xpto"; // Strong
     await createLoginPage.passwordTextBox.setValue(infoUser.password);
-    await expect(createLoginPage.passwordAlertStrengthMessage).toHaveText("Password Strength: Very Strong"); //Se não funcionar, utilizar o selector: #password-strength-meter-label
+    await expect(createLoginPage.passwordAlertStrengthMessage).toHaveText("Password Strength: Very Strong");
 
-    // Noticed that passwordBox is not validating properly, this means, that it's not mandatory to have at least one uppercase character (BUG)
-  });
-
-  it("X. Should...", async () => {
-    //1 - Teste para preencher os campos e criar o login com sucesso -> Validar que login foi criado
-    //2 - Teste para preencher os campos e criar o login com insucesso -> Validar mensagem de insucesso (não respeita o mínimo caracteres da password ou username)
-    //3 - Validar o mínimo de caracteres para password (ex. min 8 carateres com 1 maiúscula, 1 minúscula, 1 carater numércio e 1 carater especial).
-    //Caso falhe em alguma validação mencionada, parar de imediato o teste e informar que falta A, B, C, D...
-    //4 - Validar se username é um palindrome e informar via teste que o username inserido é um Palindrome e abortar o teste
+    // BUG - PasswordBox element is not validating properly, because it's not mandatory to have at least one uppercase character.
   });
 });
