@@ -8,8 +8,14 @@ describe("Login Tests", () => {
     // browser.maximizeWindow();  // run browser maximized
   });
 
+  /* Feature: Login into the webpage using an e-mail address and password.
+  
+  Scenario: Users logs in.
+    Given the login webpage
+    When user inputs a valid e-mail address and password 
+    Then by clicking on the button "Sign In", it should log in.
+  */
   it("Should login with valid credentials and assert result", async () => {
-    // Your test logic here
     await LoginPage.login("layola4512@elixirsd.com", "Magento1986");
 
     // Perform assertions
